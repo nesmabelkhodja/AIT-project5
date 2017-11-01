@@ -3,6 +3,7 @@ const cookied = require('./cookied.js');
 const app = express();
 const bodyParser = require('body-parser');
 const colorOptions = require('./colors.js');
+let color = '';
 
 app.set('view engine', 'hbs');
 
@@ -24,12 +25,12 @@ app.use(cookied.parseCookies);
 app.use(cookied.manageSession);
 
 app.get('/', function(req, res) {
-    const favColor = req.hwSession.favColor || '#fff';
+    const favColor = color || '#fff';
     res.render('index', {favColor:favColor, 'sessionData':JSON.stringify(req.hwSession, null, 2)});
 });
 
 app.get('/preferences', function(req, res) {
-    const favColor = req.hwSession.favColor || '#fff';
+    const favColor = color || '#fff';
     const options = colorOptions.map(function(c) {
         c.selected = c.hex === favColor; 
         return c;
@@ -39,6 +40,7 @@ app.get('/preferences', function(req, res) {
 
 app.post('/preferences', function(req, res) {
     req.hwSession.favColor = req.body.favColor;
+    color = req.hwSession.favColor;
     res.redirect('/preferences');
 });
 
