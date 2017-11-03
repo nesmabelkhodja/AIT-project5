@@ -1,0 +1,37 @@
+<h1> ֎ Movies ֍</h1>
+
+<form class="filterGenre" method="get" action="">
+   <input type="radio" name="filterGenre" value="Rock"> Rock
+   <input type="radio" name="filterGenre" value="Pop"> Pop
+   <input type="radio" name="filterGenre" value="Hip-Hop"> Hip-Hop
+   <input type="radio" name="filterGenre" value="Electronic"> Electronic
+   <input type="radio" name="filterGenre" value="Metal"> Metal
+   <input type="radio" name="filterGenre" value="Jazz"> Jazz
+   <input type="submit" value="Filter By Genre">
+</form>
+
+<table style="width:100%">
+  <tr>
+    <th>Title</th>
+    <th>Director</th> 
+    <th>Year</th>
+  </tr>
+  
+  {{#each movies}}
+  <tr>
+    <td>{{this.title}}</td>
+    <td>{{this.director}}</td> 
+    <td>{{this.year}}</td>
+  </tr>
+  {{/each}}
+</table>
+
+<h2> Add a band recommendation: </h2>
+
+ <form method="post" action"">
+ 
+  <p class="add">
+    Title: <input name="title" type="text">, directed by: <input name="director" type="text">, in: (<input name="date" type="text">)
+    <input type="submit">
+  </p>
+</form>
