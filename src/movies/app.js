@@ -3,6 +3,7 @@ const express = require('express');
 require('./db');
 const bodyParser = require('body-parser');
 const app = express();
+const session = require('express-session');
 
 const mongoose = require('mongoose');
 const Movie = mongoose.model('Movie');
@@ -12,12 +13,13 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/movies', function(req, res) {
-	let constraint = {};  
+	let criteria = {};  
 	if (typeof (req.query.director) !== 'undefined'  && (req.query.director).length>0){
-	  	constraint = req.query.director; 
+	  	criteria = {director: req.query.director};
+	  	console.log(criteria); 
 	  }
 
-  Movie.find(constraint, function(err, movies, count) {
+  Movie.find(criteria, function(err, movies, count) {
     if(err) {
       res.send(err); 
     }
