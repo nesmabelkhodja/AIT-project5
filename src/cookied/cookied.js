@@ -1,5 +1,4 @@
 const uuid = require('node-uuid');
-const http = require('http');
 // manageSession and parseCookies
 
 function parseCookies(req, res, next){
